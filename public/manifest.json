@@ -1,0 +1,21 @@
+{
+  "name": "Limitless Infotech Solution",
+  "short_name": "Limitless",
+  "description": "Empowering businesses with technology that is secure, unique, and limitless.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2A52BE",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

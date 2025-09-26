@@ -1,0 +1,218 @@
+openapi: 3.0.0
+info:
+  title: Limitless
+  version: 2.0.0
+  description: >
+    API for the autonomous, self-learning chatbot.
+    Includes feedback-driven learning, knowledge ingestion,
+    retraining hooks, and analytics for self-ownership.
+
+servers:
+  - url: https://example.com/api
+    description: Production Server
+
+paths:
+  /chat/send:
+    post:
+      summary: Send a message to Limitless
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                sessionId:
+                  type: string
+                  description: A unique identifier for the conversation session.
+                message:
+                  type: string
+                  description: The user's message text.
+      responses:
+        '200':
+          description: A successful response from the bot.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  responseId:
+                    type: string
+                    description: A unique ID for the bot's response message.
+                  response:
+                    type: string
+                    description: The bot's text response.
+                  suggestions:
+                    type: array
+                    items:
+                      type: string
+                    description: Suggested follow-up prompts.
+                  structuredData:
+                    type: object
+                    description: Optional structured data for rich UI rendering.
+                    properties:
+                      type:
+                        type: string
+                        enum: [serviceList]
+                      items:
+                        type: array
+                        items:
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                            link:
+                              type: string
+
+  /chat/history:
+    get:
+      summary: Retrieve conversation history for a session
+      parameters:
+        - name: sessionId
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Conversation history
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  messages:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        role:
+                          type: string
+                          enum: [user, bot]
+                        message:
+                          type: string
+
+  /chat/feedback:
+    post:
+      summary: Provide feedback on a bot's response
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                responseId:
+                  type: string
+                  description: The unique ID of the message being rated.
+                feedback:
+                  type: string
+                  enum: [positive, negative]
+                  description: The user's feedback.
+                feedbackCategory:
+                  type: string
+                  enum: [accuracy, relevance, tone, other]
+                  description: Category of feedback (helps learning).
+                userComment:
+                  type: string
+                  description: Optional additional comments from the user.
+      responses:
+        '200':
+          description: Feedback successfully recorded.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Feedback received."
+
+  /knowledge/upload:
+    post:
+      summary: Upload domain-specific documents or FAQs
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Knowledge added successfully.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Knowledge uploaded"
+
+  /analytics/learning:
+    get:
+      summary: Get learning performance metrics
+      responses:
+        '200':
+          description: Metrics data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  accuracyRate:
+                    type: number
+                  feedbackStats:
+                    type: object
+                  retrainingStatus:
+                    type: string
+                    example: "idle"
+
+  /model/retrain:
+    post:
+      summary: Trigger model retraining
+      responses:
+        '202':
+          description: Retraining started
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "Retraining initiated"
+
+  /user/data/export:
+    get:
+      summary: Export all user-owned data
+      responses:
+        '200':
+          description: User data exported
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  exportUrl:
+                    type: string
+                    description: URL to download exported data.
+
+  /user/data/delete:
+    delete:
+      summary: Delete all user-owned data
+      responses:
+        '200':
+          description: User data deleted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: "User data deleted"

@@ -1,0 +1,14 @@
+{
+  "chatbot": {
+    "welcome": "¡Hola! Soy Auralis, tu asistente de IA de Limitless Infotech Solution Pvt. Ltd. Donde la innovación se encuentra con la ejecución, estoy aquí para ayudarte a descubrir nuestras soluciones tecnológicas de vanguardia, explorar nuestro portafolio exitoso y responder cualquier pregunta sobre transformar tu negocio. ¿Cómo puedo ayudarte hoy?",
+    "fallback": "Lo siento, no entendí eso. ¿Podrías por favor reformular tu pregunta?",
+    "placeholder": "Pregúntame cualquier cosa sobre Limitless...",
+    "export": "Exportar Conversación",
+    "newChat": "Nuevo Chat",
+    "minimize": "Minimizar Chat",
+    "close": "Cerrar Chat",
+    "voiceInput": "Entrada de voz",
+    "send": "Enviar mensaje",
+    "poweredBy": "Desarrollado por Limitless Brain"
+  }
+}

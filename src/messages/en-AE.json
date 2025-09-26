@@ -1,0 +1,16 @@
+{
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "portfolio": "Portfolio",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Transform Your Business with AI-Powered Solutions",
+      "subtitle": "Limitless Infotech delivers cutting-edge web development, mobile apps, and custom software solutions",
+      "cta": "Get Started"
+    }
+  }
+}
